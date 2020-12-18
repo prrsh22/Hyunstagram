@@ -45,6 +45,10 @@ function Header() {
 
     } else {
         image(noti, 620, 30, 35, 35);
+        push();
+        fill('red');
+        if (!followChecked) circle(630, 20, 10);
+        pop();
     }
 
     // UserProfilePic

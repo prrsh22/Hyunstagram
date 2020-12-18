@@ -12,8 +12,12 @@ let following;
 
 // state
 let notiClicked = false;
+let followChecked = true;
 let followRequested = false;
 let followed = false;
+
+// time
+let requestTime;
 
 function preload() {
   basicFont = loadFont('assets/fonts/basic.otf');
@@ -40,6 +44,8 @@ function draw() {
   background(255);
   stroke(96, 96, 96, 70);
 
+  acceptFollow();
+
   Profile();
   Header();
   
@@ -62,7 +68,21 @@ function mouseOver(m,x,y,w,h) {
 
 function mouseClicked() {
   if (!followed) {
-    if (mouseOver('c', 620, 30, 35, 35)) notiClicked = !notiClicked;
-    else if (mouseOver('l', 410, 80, 80, 30, 10)) followRequested = !followRequested;
+    if (mouseOver('l', 410, 80, 80, 30, 10)) { 
+      followRequested = !followRequested;
+      requestTime = millis();
+    }
   }
+
+  if (mouseOver('c', 620, 30, 35, 35)) {
+    notiClicked = !notiClicked;
+    followChecked = true;
+  }
+}
+
+function acceptFollow() {
+  if (!followed && followRequested && requestTime + 3000 < millis()) {
+    followed = true;
+    followChecked = false;
+  }  
 }
