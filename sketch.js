@@ -1,7 +1,28 @@
+// assets
+let basicFont;
+let boldFont;
 let logoFont;
+let userProfile;
+let myProfile;
+let noti;
+let clickedNoti;
+let dm;
+let home;
+
+// state
+let notiClicked = false;
+let followed = false;
 
 function preload() {
-  logoFont = loadFont('assets/logo.ttf');
+  basicFont = loadFont('assets/fonts/basic.otf');
+  boldFont = loadFont('assets/fonts/bold.otf');
+  logoFont = loadFont('assets/fonts/logo.ttf');
+  userProfile = loadImage('assets/images/userProfile.png');
+  myProfile = loadImage('assets/images/myProfile.png');
+  noti = loadImage('assets/images/noti.png');
+  clickedNoti = loadImage('assets/images/clickedNoti.png');
+  dm = loadImage('assets/images/dm.png');
+  home = loadImage('assets/images/home.png');
 }
 
 function setup() {
@@ -10,23 +31,32 @@ function setup() {
 
 function draw() {
   textAlign(CENTER, CENTER);
+  imageMode(CENTER);
+  textFont(basicFont);
 
-  //rectMode(CENTER);
-  background(0);
+  background(255);
+  stroke(96, 96, 96, 70);
+
+  Profile();
+  Header();
+  
   fill(255);
-  rect(0, 0, 900, 60);
-  fill('gray');
-  rect(0, 60, 900, 150);
-  fill(255);
+
   for (let i = 0; i<2; i++) {
     for (let j = 0; j<3; j++) {
-      rect(30 + 230*j, 240 + 230*i, 200, 200);
+      rect(30 + 230*j, 260 + 230*i, 200, 200);
     }
   }
   
-  fill(0);
-  textSize(40);
-  textFont(logoFont);
-  text('Hyunstagram', 100, 20);
   
+  
+}
+
+function mouseOver(x,y,w,h) {
+  // imageMode CENTER일 경우
+  return (mouseX > x - w/2 && mouseX < x + w/2 && mouseY > y - h/2 && mouseY < y + h/2);
+}
+
+function mouseClicked() {
+  if (mouseOver(620, 30, 35, 35)) notiClicked = !notiClicked;
 }
