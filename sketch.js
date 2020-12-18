@@ -1,8 +1,16 @@
+let logoFont;
+
+function preload() {
+  logoFont = loadFont('assets/logo.ttf');
+}
+
 function setup() {
   createCanvas(720, 720);
 }
 
 function draw() {
+  textAlign(CENTER, CENTER);
+
   //rectMode(CENTER);
   background(0);
   fill(255);
@@ -17,6 +25,8 @@ function draw() {
   }
   
   fill(0);
-  text('Hyunstagram', 30, 100);
+  textSize(40);
+  textFont(logoFont);
+  text('Hyunstagram', 100, 20);
   
 }
