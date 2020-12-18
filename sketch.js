@@ -87,24 +87,28 @@ function mouseOver(m,x,y,w,h) {
 }
 
 function mouseClicked() {
+  
   if (!followed) {
     if (mouseOver('l', 410, 80, 80, 30, 10)) { 
       followRequested = !followRequested;
       requestTime = millis();
     }
-  } else if (!feedOpened) {
-    feeds.forEach(feed => {
-      if (feed.over()) {
-        feedOpened = str(feeds.indexOf(feed));
-      }
-    });
-  } else if (feedOpened) {
-    if (!mouseOver('l', 60, 275, 600, 400) && mouseOver('l', 0, 230, 720, 720)) feedOpened = undefined;
-    else if (mouseOver('c', 485, 595, 30, 30)) {
+  } else {
+    if (mouseOver('c', 430, 95, following.width/1.5, following.height/1.5)) followed = false;
+    else if (!feedOpened) {
+      feeds.forEach(feed => {
+        if (feed.over()) {
+          feedOpened = str(feeds.indexOf(feed));
+        }
+      });
+    } else {
+      if (!mouseOver('l', 60, 275, 600, 400) && mouseOver('l', 0, 230, 720, 720)) feedOpened = undefined;
+      else if (mouseOver('c', 485, 595, 30, 30)) {
       feed = feeds[feedOpened];
       if (feed.liked) feed.like -= 1;
       else feed.like += 1;
       feed.liked = !feed.liked
+      }
     }
   }
 
@@ -113,17 +117,19 @@ function mouseClicked() {
     followChecked = true;
   }
 
+  
+
 }
 
 function acceptFollow() {
   if (!followed && followRequested && requestTime + 2000 < millis()) {
-    if (Math.random() < 0.8) {
+    followRequested = false;
+    if (Math.random() < 0.5) {
       followed = true;
       followChecked = false;
-      accepted.play();
+      accepted.play(undefined, undefined, 0.1);
     } else {
-      followRequested = false;
-      rejected.play();
+      rejected.play(undefined, undefined, 0.1);
     }
   }  
 }
