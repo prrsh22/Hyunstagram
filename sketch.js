@@ -49,13 +49,8 @@ function draw() {
   Profile();
   Header();
   
-  fill(255);
 
-  for (let i = 0; i<2; i++) {
-    for (let j = 0; j<3; j++) {
-      rect(30 + 230*j, 260 + 230*i, 200, 200);
-    }
-  }
+  Posts();
   
   
   
@@ -74,7 +69,7 @@ function mouseClicked() {
     }
   }
 
-  if (mouseOver('c', 620, 30, 35, 35)) {
+  if (mouseOver('c', 620, 30, 35, 35) || notiClicked) {
     notiClicked = !notiClicked;
     followChecked = true;
   }
@@ -82,7 +77,12 @@ function mouseClicked() {
 
 function acceptFollow() {
   if (!followed && followRequested && requestTime + 3000 < millis()) {
-    followed = true;
-    followChecked = false;
+    if (Math.random() < 0.8) {
+      // 80% 확률로 팔로우 받아줌ㅋㅋ
+      followed = true;
+      followChecked = false;
+    } else {
+      followRequested = false;
+    }
   }  
 }

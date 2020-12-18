@@ -78,7 +78,7 @@ function Profile() {
     textFont(boldFont);
     text('김소현', 260, 175)
     text('6', 310, 135);
-    text('237', 400, 135);
+    followed ? text('238', 400, 135):text('237', 400, 135);
     text('380', 490, 135);
     pop();
 
@@ -100,5 +100,25 @@ function Profile() {
         fill(255);
         textSize(15);
         text('팔로우', 450, 92);
+    }
+}
+
+function Posts() {
+    if (followed) {
+        fill(255);
+
+        for (let i = 0; i<2; i++) {
+            for (let j = 0; j<3; j++) {
+            rect(30 + 230*j, 260 + 230*i, 200, 200);
+            }
+        }
+    } else {
+        fill(0);
+        textSize(50);
+        textFont(boldFont);
+        text('비공개 계정입니다', 360, 360);
+        textSize(25);
+        textFont(basicFont);
+        text('사진을 보려면 팔로우하세요', 360, 450);
     }
 }
