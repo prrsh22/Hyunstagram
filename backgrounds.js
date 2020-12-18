@@ -105,13 +105,12 @@ function Profile() {
 
 function Posts() {
     if (followed) {
-        fill(255);
+        feeds.forEach(feed => {
+            feed.showThumb();
+        })
 
-        for (let i = 0; i<2; i++) {
-            for (let j = 0; j<3; j++) {
-            rect(30 + 230*j, 260 + 230*i, 200, 200);
-            }
-        }
+        if (feedOpened) feeds[feedOpened].showFull();
+        
     } else {
         fill(0);
         textSize(50);
