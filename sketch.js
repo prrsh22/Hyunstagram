@@ -8,9 +8,11 @@ let noti;
 let clickedNoti;
 let dm;
 let home;
+let following;
 
 // state
 let notiClicked = false;
+let followRequested = false;
 let followed = false;
 
 function preload() {
@@ -23,6 +25,7 @@ function preload() {
   clickedNoti = loadImage('assets/images/clickedNoti.png');
   dm = loadImage('assets/images/dm.png');
   home = loadImage('assets/images/home.png');
+  following = loadImage('assets/images/following.png');
 }
 
 function setup() {
@@ -52,11 +55,14 @@ function draw() {
   
 }
 
-function mouseOver(x,y,w,h) {
-  // imageMode CENTER일 경우
-  return (mouseX > x - w/2 && mouseX < x + w/2 && mouseY > y - h/2 && mouseY < y + h/2);
+function mouseOver(m,x,y,w,h) {
+  if (m === 'c') return (mouseX > x - w/2 && mouseX < x + w/2 && mouseY > y - h/2 && mouseY < y + h/2);
+  else if (m === 'l') return (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h);
 }
 
 function mouseClicked() {
-  if (mouseOver(620, 30, 35, 35)) notiClicked = !notiClicked;
+  if (!followed) {
+    if (mouseOver('c', 620, 30, 35, 35)) notiClicked = !notiClicked;
+    else if (mouseOver('l', 410, 80, 80, 30, 10)) followRequested = !followRequested;
+  }
 }
