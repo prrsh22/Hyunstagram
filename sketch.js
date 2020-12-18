@@ -11,6 +11,9 @@ let home;
 let following;
 let liked;
 
+let accepted;
+let rejected;
+
 // state
 let notiClicked = false;
 let followChecked = true;
@@ -43,6 +46,9 @@ function preload() {
   home = loadImage('assets/images/home.png');
   following = loadImage('assets/images/following.png');
   liked = loadImage('assets/images/liked.png');
+
+  accepted = loadSound('assets/sounds/accepted.mp3');
+  rejected = loadSound('assets/sounds/rejected.mp3');
 
   for (let i=0; i<6;i++){
     imgs[i] = loadImage(`assets/images/feed/${i}.jpg`);
@@ -114,8 +120,10 @@ function acceptFollow() {
     if (Math.random() < 0.8) {
       followed = true;
       followChecked = false;
+      accepted.play();
     } else {
       followRequested = false;
+      rejected.play();
     }
   }  
 }
